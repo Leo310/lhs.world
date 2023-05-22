@@ -1,16 +1,13 @@
 import { Canvas } from "@react-three/fiber";
+import Skills from "features/magazine/skills";
 
 function App() {
     return (
         <>
-            <div id="canvas-container" className="h-screen bg-red-100">
+            <div id="canvas-container" className="h-screen bg-gray-500">
                 <Canvas>
                     <ambientLight />
-                    <pointLight position={[10, 10, 10]} />
-                    <mesh rotation={[1, 0, 0]}>
-                        <boxGeometry args={[10, 1, 1]} />
-                        <meshStandardMaterial color="hotpink" />
-                    </mesh>
+                    <Skills />
                 </Canvas>
             </div>
         </>

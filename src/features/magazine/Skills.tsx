@@ -36,22 +36,20 @@ const Skills = () => {
     });
 
     return (
-        <>
-            <group position={[2, 2, -2]}>
-                <mesh ref={cube}>
-                    <boxGeometry />
-                    <meshPhongMaterial map={PBMap} />
-                </mesh>
-                <group ref={skillIconsGroup}>
-                    {skillTextures.map((texture, i) => (
-                        <mesh key={i}>
-                            <planeGeometry />
-                            <meshPhongMaterial transparent={true} map={texture} />
-                        </mesh>
-                    ))}
-                </group>
+        <group>
+            <mesh ref={cube}>
+                <boxGeometry />
+                <meshPhongMaterial map={PBMap} />
+            </mesh>
+            <group ref={skillIconsGroup}>
+                {skillTextures.map((texture, i) => (
+                    <mesh key={i}>
+                        <planeGeometry />
+                        <meshPhongMaterial transparent={true} map={texture} />
+                    </mesh>
+                ))}
             </group>
-        </>
+        </group>
     );
 };
 

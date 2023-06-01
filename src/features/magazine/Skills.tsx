@@ -1,4 +1,4 @@
-import { useFrame, useLoader } from "@react-three/fiber";
+import { useFrame, useLoader, useThree } from "@react-three/fiber";
 import { Group, Mesh, Texture, TextureLoader } from "three";
 import PB from "assets/PB.png";
 import { useRef } from "react";
@@ -8,6 +8,7 @@ const skillIconUrls = Object.values(
 );
 
 const Skills = () => {
+    const three = useThree();
     const PBMap = useLoader(TextureLoader, PB);
 
     const cube = useRef<Mesh>(null!);
@@ -30,13 +31,25 @@ const Skills = () => {
         });
     };
 
+    let currentAngle = 0;
+    let lastMouseXPos = 0;
+    let isMouseDown = false;
     useFrame(() => {
         cube.current.rotation.y += 0.01;
         rotateSkillIcons(cube.current.rotation.y);
+
+        if (isMouseDown) {
+            rotateSkillIcons(currentAngle);
+            const mouseXDiff = (three.pointer.x - lastMouseXPos) * 2;
+            currentAngle += mouseXDiff;
+
+            cube.current.rotateY(mouseXDiff);
+            lastMouseXPos = three.pointer.x;
+        }
     });
 
     return (
-        <group>
+        <group onPointerDown={() => (isMouseDown = true)}>
             <mesh ref={cube}>
                 <boxGeometry />
                 <meshPhongMaterial map={PBMap} />

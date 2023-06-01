@@ -1,7 +1,10 @@
 import { useFrame } from "@react-three/fiber";
-import Skills from "features/magazine/Skills";
 import { useRef } from "react";
 import { Group } from "three";
+
+import Skills from "features/magazine/Skills";
+import World from "features/magazine/World";
+import Workspace from "features/magazine/Workspace";
 
 const Magazine = () => {
     const group = useRef<Group>(null!);
@@ -25,7 +28,8 @@ const Magazine = () => {
         <>
             <group position={[0, 0, -10]} ref={group}>
                 <Skills />
-                <Skills />
+                <World />
+                <Workspace />
                 <Skills />
                 <Skills />
             </group>
